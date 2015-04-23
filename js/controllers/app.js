@@ -27,7 +27,7 @@ angular.module(module.exports, dependencies)
             $http.post(server + '/store', { token: $scope.token.token, playbackPosition: $scope.asset.playbackPosition });
         };
         $scope.get = function () {
-            $http.get(server + '/get/' + $scope.user.id + '/' + $scope.asset.id)
+            $http.get(server + '/load/' + $scope.user.id + '/' + $scope.asset.id)
                 .success(function (data) {
                     $scope.asset.playbackPosition = data;
                 });
