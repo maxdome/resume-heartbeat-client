@@ -7,29 +7,26 @@ var dependencies = [];
 
 angular.module(module.exports, dependencies)
     .controller('AppCtrl', ['$scope', '$http', function ($scope, $http) {
-        $scope.user = {
-            id: null
-        };
-        $scope.asset = {
-            id: null,
-            playbackPosition: null
-        };
-        $scope.token = {
-            token: null
+        $scope.app = {
+            user_id: null,
+            asset_id: null,
+            token: null,
+            playbackPosition: null,
+            query: null
         };
         $scope.token = function () {
-            $http.post(server + '/token', { user_id: $scope.user.id, asset_id: $scope.asset.id })
+            $http.post(server + '/token', { user_id: $scope.app.user_id, asset_id: $scope.app.asset_id })
                 .success(function (data) {
-                    $scope.token.token = data;
+                    $scope.app.token = data;
                 });
         };
         $scope.store = function () {
-            $http.post(server + '/store', { token: $scope.token.token, playbackPosition: $scope.asset.playbackPosition });
+            $http.post(server + '/store', { token: $scope.app.token, playbackPosition: $scope.app.playbackPosition });
         };
         $scope.get = function () {
-            $http.get(server + '/load/' + $scope.user.id + '/' + $scope.asset.id)
+            $http.get(server + '/load/' + $scope.app.user_id + '/' + $scope.app.query)
                 .success(function (data) {
-                    $scope.asset.playbackPosition = data;
+                    $scope.app.playbackPosition = data;
                 });
         };
     }]);
