@@ -3,7 +3,9 @@
 /**
  * Serves the homepage for the application
  * @example
-    homepage: {}
+    homepage: {
+        server: ''
+    }
  */
 
 module.exports = function (config, libraries, services) {

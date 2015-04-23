@@ -47,7 +47,9 @@ var config = {
             }]
         ],
         directory: {
-            homepage: {}
+            homepage: {
+                server: process.env.SERVER
+            }
         }
     }
 };
