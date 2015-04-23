@@ -18,16 +18,18 @@ angular.module(module.exports, dependencies)
             token: null
         };
         $scope.token = function () {
-            console.log($scope.user.id);
-            console.log($scope.asset.id);
-            $scope.token.token = 'newToken';
+            $http.post(server + '/token', { user_id: $scope.user.id, asset_id: $scope.asset.id })
+                .success(function (data) {
+                    $scope.token.token = data;
+                });
         };
         $scope.store = function () {
-            console.log($scope.token.token);
-            console.log($scope.asset.playbackPosition);
+            $http.post(server + '/store', { token: $scope.token.token, playbackPosition: $scope.asset.playbackPosition });
         };
         $scope.get = function () {
-            console.log($scope.user.id);
-            console.log($scope.asset.id);
+            $http.get(server + '/get/' + $scope.user.id + '/' + $scope.asset.id)
+                .success(function (data) {
+                    $scope.asset.playbackPosition = data;
+                });
         };
     }]);
